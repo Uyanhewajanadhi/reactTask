@@ -195,6 +195,8 @@ function SignUp() {
                 variant="contained"
                 color="primary"
                 className={classes.submit}
+                component={Link}
+                to="/"
                 
                 >
             

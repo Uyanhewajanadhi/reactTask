@@ -148,6 +148,9 @@ function LogIn({ onLogin, onAdmin }) {
                 variant="contained"
                 color="primary"
                 className={classes.submit}
+                component={Link}
+                to="/dash-board"
+                
                 
                 // onClick={(e) => {
                 //   e.preventDefault();
