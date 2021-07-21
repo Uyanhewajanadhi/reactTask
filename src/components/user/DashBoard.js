@@ -26,6 +26,22 @@ import CardContent from '@material-ui/core/CardContent';
 import { Link } from "react-router-dom";
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
+import DashboardIcon from "@material-ui/icons/Dashboard";
+import GroupWorkRoundedIcon from "@material-ui/icons/GroupWorkRounded";
+import PeopleRoundedIcon from "@material-ui/icons/PeopleRounded";
+import AssessmentIcon from "@material-ui/icons/Assessment";
+import EventIcon from "@material-ui/icons/Event";
+import PersonRoundedIcon from "@material-ui/icons/PersonRounded";
+import SettingsRoundedIcon from "@material-ui/icons/SettingsRounded";
+import PowerSettingsNewRoundedIcon from "@material-ui/icons/PowerSettingsNewRounded";
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import InboxIcon from '@material-ui/icons/Inbox';
+import MailIcon from '@material-ui/icons/Mail';
+import BusinessIcon from '@material-ui/icons/Business';
+import RecentActorsIcon from '@material-ui/icons/RecentActors';
+import NumOfSignedUpUsers from "./NumOfSignedUpUsers";
+import CurrentLogedIn from "./CurrentLogedIn";
+
 
 const drawerWidth = 240;
 
@@ -36,7 +52,8 @@ const useStyles = makeStyles((theme) => ({
   apptitle: {
     padding: theme.spacing(2),//16px
     fontWeight: 500,
-    textDecoration: 'none'
+    textDecoration: 'none',
+    color: "#BDEDFF"
 }
 ,
 appspace: {
@@ -45,7 +62,7 @@ appspace: {
     color: "#E3E6F5"
 },
 appbar: {
-    background: '#E3E6F5',
+    background: '#151B54',
 },
   drawer: {
     [theme.breakpoints.up("sm")]: {
@@ -84,7 +101,7 @@ function Dashboard(props) {
     <div>
       <div className={classes.toolbar} />
 
-      <Box  m={1} 
+      <Box  m={1}
               alignItems= "center"
               justify="center"
               justifyContent="center">
@@ -97,8 +114,8 @@ function Dashboard(props) {
                     justify="center"
                     justifyContent="center"
               >
-
-              
+                <AccountCircleIcon fontSize="Large"/>
+                {/* <Avatar alt="A Pathirana" src="../../resources/logo_big.png" className={classes.large} /> */}
 
               </Grid>
 
@@ -113,13 +130,8 @@ function Dashboard(props) {
               <Typography color="initial" >
                   A.T. Pathirana
               </Typography>
-              <Typography color="initial" >
-                  Head of Division
-              </Typography>
               </Grid>
           </Box>
-
-
 
 
       <Divider />
@@ -134,8 +146,11 @@ function Dashboard(props) {
           { name: "Settings", link: "/settings" },
           { name: "Log Out", link: "/" },
         ].map((text, index) => (
+         
           <ListItem button key={text.name} component={Link} to={text.link}>
-            {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
+            { <ListItemIcon>
+              {index=== 0 ? <BusinessIcon /> : <RecentActorsIcon />}
+            </ListItemIcon> }
             <ListItemText primary={text.name} />
           </ListItem>
         ))}
@@ -149,7 +164,7 @@ function Dashboard(props) {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      
+
 <AppBar
                 position="fixed"
                 color="primary"
@@ -199,60 +214,24 @@ function Dashboard(props) {
       </nav>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Grid container
-      spacing={0}
-      direction="column"
-      alignItems="center"
-      justify="center"
-      style={{ minHeight: '100vh' }}>
-
-
-
-      <Grid
-        container
-        spacing={0}
-        direction="column"
-        alignItems= "flex-start"
-        justify="center"
-        justifyContent="flex-start"
-        style={{ minHeight: '20vh' , spacing:'{10rem}'}}
-        
-      >
-      
-        </Grid>
-
-     
-
-              <Grid container spacing={1}>
+   
+     <Grid container spacing={1}>
         <Grid container item xs={12} spacing={3}>
           <Grid item xs={4}>
-
+           <NumOfSignedUpUsers/>
             {/* <Paper className={classes.paper}>item</Paper> */}
           </Grid>
-
-
         </Grid>
 
-        
-      </Grid>
-      <br/>
-        
-      <Grid
-        container
-        spacing={0}
-        direction="column"
-        alignItems= "flex-start"
-        justify="center"
-        justifyContent="flex-start"
-        style={{ minHeight: '20vh' }}
-      >
+        <Grid container item xs={12} spacing={3}>
+          <Grid item xs={4}>
+           <CurrentLogedIn/>
+            {/* <Paper className={classes.paper}>item</Paper> */}
+          </Grid>
         </Grid>
 
       </Grid>
 
-
-
-      
        
       </main>
     </div>

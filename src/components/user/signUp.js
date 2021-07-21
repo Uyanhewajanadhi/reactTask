@@ -67,32 +67,26 @@ const useStyles = makeStyles((theme) => ({
 function SignUp() {
 
     const classes = useStyles();
-    // const [email, setEmail] = useState(``);
-    // const [password, setPassword] = useState(``);
+    const [fname, setFname] = useState(``);
+    const [lname, setLnam] = useState(``);
+    const [contactnum, setContactnum] = useState(``);
+    const [email, setEmail] = useState(``);
+    const [password, setPassword] = useState(``);
+    const [confpassword, setConfpassword] = useState(``);
+    
   
-    // const loginAttempt = async (email, password) => {
-    //   var axios = require("axios");
-    //   axios
-    //     .post(`${window.backendURL}/login`, {
-    //       email: email,
-    //       password: password,
-    //     })
-    //     .then((res) => {
-    //       let data = res.data;
-    //       // console.log(data);
-    //       // Token should be avail. if successful
-    //       if (data.token) {
-    //         window.token = data.token;
-    //         if (data.info.isAdmin) {
-    //           onAdmin(true);
-    //         }
-    //         onLogin(data.token);
-    //         //   alert(data.info.initialSetup);
-    //       } else {
-    //         alert("Login failed!");
-    //       }
-    //     });
-    // };
+    const signUpAttempt = async (fname, lname, contactnum, email, password, confpassword) => {
+      var axios = require("axios");
+      axios
+        .post(`${window.backendURL}/sign-up`, {
+          fname: fname,
+          lname: lname,
+          contactnum: contactnum,
+          email: email,
+          password: password,
+          confpassword: confpassword,
+        })
+    };
  
   return (
     <Grid
@@ -197,6 +191,10 @@ function SignUp() {
                 className={classes.submit}
                 component={Link}
                 to="/"
+                onClick={(e) => {
+                  // e.preventDefault();
+                  signUpAttempt(fname, lname, contactnum, email, password, confpassword);
+                }}
                 
                 >
             
@@ -212,4 +210,3 @@ function SignUp() {
 }
 
 export default SignUp;
-

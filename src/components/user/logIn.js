@@ -59,32 +59,31 @@ const useStyles = makeStyles((theme) => ({
 function LogIn({ onLogin, onAdmin }) {
 
     const classes = useStyles();
-    // const [email, setEmail] = useState(``);
-    // const [password, setPassword] = useState(``);
+    const [email, setEmail] = useState(``);
+    const [password, setPassword] = useState(``);
   
-    // const loginAttempt = async (email, password) => {
-    //   var axios = require("axios");
-    //   axios
-    //     .post(`${window.backendURL}/login`, {
-    //       email: email,
-    //       password: password,
-    //     })
-    //     .then((res) => {
-    //       let data = res.data;
-    //       // console.log(data);
-    //       // Token should be avail. if successful
-    //       if (data.token) {
-    //         window.token = data.token;
-    //         if (data.info.isAdmin) {
-    //           onAdmin(true);
-    //         }
-    //         onLogin(data.token);
-    //         //   alert(data.info.initialSetup);
-    //       } else {
-    //         alert("Login failed!");
-    //       }
-    //     });
-    // };
+    const loginAttempt = async (email, password) => {
+      var axios = require("axios");
+      axios
+        .post(`${window.backendURL}/login`, {
+          email: email,
+          password: password,
+        })
+        .then((res) => {
+          let data = res.data;
+          // console.log(data);
+          // Token should be avail. if successful
+          if (data.token) {
+            window.token = data.token;
+            if (data.info.isAdmin) {
+              onAdmin(true);
+            }
+            onLogin(data.token);
+          } else {
+            alert("Login failed!");
+          }
+        });
+    };
  
   return (
     <Grid
@@ -112,7 +111,7 @@ function LogIn({ onLogin, onAdmin }) {
                 name="email"
                 autoComplete="email"
                 autoFocus
-                // onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
               />
               <TextField
                 className={classes.textfield}
@@ -125,7 +124,7 @@ function LogIn({ onLogin, onAdmin }) {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                // onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
               />
               <div className={classes.grid}>
                 <Grid container spacing={3}>
@@ -152,10 +151,10 @@ function LogIn({ onLogin, onAdmin }) {
                 to="/dash-board"
                 
                 
-                // onClick={(e) => {
-                //   e.preventDefault();
-                //   loginAttempt(email, password);
-                // }}
+                onClick={(e) => {
+                  // e.preventDefault();
+                  loginAttempt(email, password);
+                }}
               >
                 Sign In
               </Button>
