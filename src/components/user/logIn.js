@@ -63,26 +63,31 @@ function LogIn({ onLogin, onAdmin }) {
     const [password, setPassword] = useState(``);
   
     const loginAttempt = async (email, password) => {
+      const userFName = localStorage.getItem('userFName');
+      const userLName = localStorage.getItem('userLName');
+      console.log(">>" , userLName)
       var axios = require("axios");
-      axios
-        .post(`${window.backendURL}/login`, {
-          email: email,
-          password: password,
-        })
-        .then((res) => {
-          let data = res.data;
-          // console.log(data);
-          // Token should be avail. if successful
-          if (data.token) {
-            window.token = data.token;
-            if (data.info.isAdmin) {
-              onAdmin(true);
-            }
-            onLogin(data.token);
-          } else {
-            alert("Login failed!");
-          }
-        });
+      // axios
+      //   .post(`${window.backendURL}/login`, {
+      //     email: email,
+      //     password: password,
+      //   })
+      //   .then((res) => {
+      //     let data = res.data;
+      //     // console.log(data);
+      //     // Token should be avail. if successful
+      //     if (data.token) {
+      //       window.token = data.token;
+      //       if (data.info.isAdmin) {
+      //         onAdmin(true);
+      //       }
+      //       onLogin(data.token);
+      //     } else {
+      //       alert("Login failed!");
+      //     }
+      //   });
+
+      
     };
  
   return (

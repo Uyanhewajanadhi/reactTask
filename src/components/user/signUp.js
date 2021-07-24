@@ -76,16 +76,23 @@ function SignUp() {
     
   
     const signUpAttempt = async (fname, lname, contactnum, email, password, confpassword) => {
+      // localStorage.setItem('userData', {fName: fname, lName: lname,
+      // contact: contactnum, email: email});
+      localStorage.setItem('userfName', fname);
+      localStorage.setItem('userlName', lname);
+      localStorage.setItem('usercontact', contactnum);
+      localStorage.setItem('useremail', email);
+            
       var axios = require("axios");
-      axios
-        .post(`${window.backendURL}/sign-up`, {
-          fname: fname,
-          lname: lname,
-          contactnum: contactnum,
-          email: email,
-          password: password,
-          confpassword: confpassword,
-        })
+      // axios
+      //   .post(`${window.backendURL}/sign-up`, {
+      //     fname: fname,
+      //     lname: lname,
+      //     contactnum: contactnum,
+      //     email: email,
+      //     password: password,
+      //     confpassword: confpassword,
+      //   })
     };
  
   return (
@@ -113,10 +120,13 @@ function SignUp() {
                     fullWidth
                     id="firstName"
                     label="First Name"
-                    name="First Name"
+                    name="fname"
                     placeholder="M.N"
                     autoFocus
-                    // onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => {
+                      e.preventDefault();
+                      setFname(e.target.value);
+                    }}
 
                 />
                     <TextField
@@ -126,9 +136,13 @@ function SignUp() {
                     fullWidth
                     id="lastName"
                     label="Last Name"
-                    name="Last Name"
+                    name="lastName"
                     placeholder="Gunawardana"
                     autoFocus
+                    onChange={(e) => {
+                      e.preventDefault();
+                      setLnam(e.target.value)
+                    }}
                 />                
                 </div>
             </form>
@@ -142,9 +156,15 @@ function SignUp() {
                 fullWidth
                 id="telephone"
                 label="Contact Number"
-                name="Contact Number"
+                name="telephone"
+                inputProps={{ maxLength: 10 }}
                 placeholder="eg: +94 123 456 789"
                 autoFocus
+                onChange={(e) => 
+                  {
+                    e.preventDefault();
+                    setContactnum(e.target.value);
+                  }}
               />
 
             <TextField
@@ -154,9 +174,12 @@ function SignUp() {
                 fullWidth
                 id="email"
                 label="Email Address"
-                name="Email Address"
+                name="email"
                 placeholder="eg: npguna@gmail.com"
                 autoFocus
+                onChange={(e) => {
+                  e.preventDefault();
+                  setEmail(e.target.value)}}
               />
               <TextField
                 className={classes.textfield}
@@ -169,7 +192,9 @@ function SignUp() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                // onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) =>{
+                  e.preventDefault(); 
+                  setPassword(e.target.value)}}
               />
 
             <TextField
@@ -178,10 +203,10 @@ function SignUp() {
                 margin="normal"
                 required
                 fullWidth
-                name="password"
+                name="confirmPassword"
                 label="Re-enter Password"
                 type="password"
-                id="password"
+                id="confirmPassword"
               />
 
               <Button

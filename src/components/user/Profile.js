@@ -39,15 +39,55 @@ import InboxIcon from '@material-ui/icons/Inbox';
 import MailIcon from '@material-ui/icons/Mail';
 import BusinessIcon from '@material-ui/icons/Business';
 import RecentActorsIcon from '@material-ui/icons/RecentActors';
-import NumOfSignedUpUsers from "./NumOfSignedUpUsers";
-import CurrentLogedIn from "./CurrentLogedIn";
-import LogInHistory from "./LogInHistory"
+import { useState } from "react";
+import CardMedia from "@material-ui/core/CardMedia";
+import logo from "../../resources/comLogo.jpg";
 
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    Height: "100%",
+    display: "flex",
+  },
+
+  card: {
+    borderRadius: 30,
+    maxWidth: 440,
+    textAlign: "center",
+    padding: "20px",
+    margin: "120px",
+    boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
+    overflow: "visible",
+  },
+  media: {
+    margin: "10px auto 0",
+    width: "30%",
+    height: 60,
+    position: "relative",
+    zIndex: 1000,
+  },
+  form: {
+    width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+    alignItems: "center",
+  },
+  button: {
+    margin: theme.spacing(1),
+  },
+  action: {
+    display: "flex",
+    justifyContent: "space-around",
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+  grid: {
+    flexGrow: 1,
+  },
+
+  root1: {
     display: "flex",
   },
   apptitle: {
@@ -88,13 +128,16 @@ appbar: {
   },
 }));
 
-function Dashboard(props) {
+function Profile(props) {
   const { window } = props;
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const fName = localStorage.getItem('userfName');
-  const lName = localStorage.getItem('userlName');
+
+    const fName = localStorage.getItem('userfName');
+    const lName = localStorage.getItem('userlName');
+    const contact = localStorage.getItem('usercontact');
+    const email  = localStorage.getItem('useremail');
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -170,9 +213,6 @@ function Dashboard(props) {
             Log Out
           </Button>
         </ListItem>
-
-
-
       </List>
     </div>
   );
@@ -181,10 +221,10 @@ function Dashboard(props) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root1}>
       <CssBaseline />
 
-<AppBar
+        <AppBar
                 position="fixed"
                 color="primary"
                 className={classes.appbar}
@@ -235,39 +275,74 @@ function Dashboard(props) {
         </Hidden>
       </nav>
       <main className={classes.content}>
-        <div className={classes.toolbar} />
-   
-     <Grid container spacing={1}>
-        <Grid container item xs={12} spacing={3}>
-          <Grid item xs={4}>
-           <NumOfSignedUpUsers/>
-            {/* <Paper className={classes.paper}>item</Paper> */}
-          </Grid>
-
-          <Grid item xs={4}>
-           <CurrentLogedIn/>
-            {/* <Paper className={classes.paper}>item</Paper> */}
-          </Grid>
-
-          <Grid item xs={4}>
-           <LogInHistory/>
-            {/* <Paper className={classes.paper}>item</Paper> */}
-          </Grid>
-        </Grid>
-        </Grid>
-
-
-        
-
-      
-
-       
+      <Grid
+      container
+      spacing={0}
+      align="center"
+      justify="center"
+      className={classes.root}
+    >
+      <Grid item>
+        <Card className={classes.card}>
+          <CardMedia className={classes.media} image={logo} title="logo" />
+          <CardContent>
+            <Typography variant="h5" align="left">
+              User Profile
+            </Typography>
+            <form className={classes.form} noValidate>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                fullWidth
+                id="fName"
+                label="FirsName"
+                name="fName"
+                autoFocus
+                value={fName}
+              />
+            <TextField
+                variant="outlined"
+                margin="normal"
+                fullWidth
+                id="lName"
+                label="LastName"
+                name="lName"
+                autoFocus
+                value={lName}
+              />     
+            <TextField
+                variant="outlined"
+                margin="normal"
+                fullWidth
+                id="contact"
+                label="Contact"
+                name="contact"
+                autoFocus
+                value={contact}
+              />     
+              <TextField
+                variant="outlined"
+                margin="normal"
+                fullWidth
+                id="email"
+                label="E-mail"
+                name="email"
+                autoFocus
+                value={email}
+              />  
+            </form>
+           
+          </CardContent>
+        </Card>
+      </Grid>
+    </Grid>
+ 
       </main>
     </div>
   );
 }
 
-Dashboard.propTypes = {
+Profile.propTypes = {
   /**
    * Injected by the documentation to work in an iframe.
    * You won't need it on your project.
@@ -275,4 +350,4 @@ Dashboard.propTypes = {
   window: PropTypes.func,
 };
 
-export default Dashboard;;
+export default Profile;;
